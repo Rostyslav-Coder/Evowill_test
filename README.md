@@ -1,5 +1,5 @@
 # Bored API Wrapper and Database.
-This program uses a Bored API wrapper and a database class to get a random activity and save it in a database.
+This program uses a Bored API wrapper and a database class to get a random activity and save it in a database. There are two versions of the program, with and without the Requests library.
 
 ## Installation
 1. Make sure you have Python and pip installed on your computer. You can check this by opening a command prompt and entering `python --version` and `pip --version`. If you do not have Python and pip installed, you can download them from the official Python website.
