@@ -3,10 +3,15 @@ This module provides a class for interacting with
 the Bored API to retrieve random activities.
 """
 
-import requests
+import json
+import urllib.parse
+import urllib.request
+
+# import requests
 
 # For information on how this module works, I recommend visiting:
-# https://docs.python-requests.org/en/latest/index.html
+# https://docs.python-requests.org/en/latest/index.html - request
+# https://docs.python.org/3/library/urllib.html - urllib
 
 
 class BoredApi:
@@ -40,6 +45,14 @@ class BoredApi:
         if accessibility_max:
             params["accessibility_max"] = accessibility_max
 
-        response = requests.get(self.base_url, params=params, timeout=None)
+        # urllib version
+        query_string = urllib.parse.urlencode(params)
+        url = self.base_url + "?" + query_string
 
-        return response.json()
+        with urllib.request.urlopen(url) as response:
+            return json.loads(response.read().decode())
+
+        # # request version
+        # response = requests.get(self.base_url, params=params, timeout=None)
+
+        # return response.json()
