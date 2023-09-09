@@ -1,0 +1,2 @@
+requests==2.31.1
+sqlite3==3.42.0
