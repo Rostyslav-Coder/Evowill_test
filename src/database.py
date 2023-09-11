@@ -11,16 +11,13 @@ import sqlite3
 # or https://www.sqlite.org/docs.html
 
 
-# Create a global connection variable
-conn = sqlite3.connect("activities.db")
-
-
 class ActivityDB:
     """A class used to represent an SQLite database for storing activities."""
 
-    def __init__(self):
+    def __init__(self, db_name="activities.db"):
         """Constructs all necessary attributes for the ActivityDB object."""
-        self.cursor = conn.cursor()
+        self.conn =sqlite3.connect(db_name)
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS activities (
@@ -35,7 +32,7 @@ class ActivityDB:
             )
         """
         )
-        conn.commit()
+        self.conn.commit()
 
     def save_activity(self, activity):
         """Saves an activity in the database."""
@@ -55,7 +52,7 @@ class ActivityDB:
                     activity["accessibility"],
                 ),
             )
-            conn.commit()
+            self.conn.commit()
         except KeyError as error:
             logging.info("Missing key in activity: %s", {error})
 
