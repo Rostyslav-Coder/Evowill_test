@@ -1,14 +1,20 @@
 """Main module"""
 
-import argparse
+import logging
+from argparse import ArgumentParser
+
 from bored_api import BoredApi
 from database import ActivityDB
 
+# For information on how this module works, I recommend visiting:
+# https://docs.python.org/3/library/argparse.html and
+# https://docs.python.org/3/library/logging.html
+
+logging.basicConfig(level=logging.INFO)
+
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Get & save random activities from Bored API"
-    )
+    parser = ArgumentParser(description="Get & save random activities from Bored API")
     subparsers = parser.add_subparsers(dest="command")
 
     new_parser = subparsers.add_parser("new", help="Get new random activity")
@@ -42,12 +48,12 @@ def main():
             accessibility_max=args.accessibility_max,
         )
         database.save_activity(activity=activity)
-        print(activity)
-        print(f"New activity saved: {activity['activity']}")
+        logging.info(activity)
+        logging.info("New activity saved: %s", {activity["activity"]})
     elif args.command == "list":
         activities = database.get_latest_activities()
         for activity in activities:
-            print(activity)
+            logging.info(activity)
 
 
 if __name__ == "__main__":
