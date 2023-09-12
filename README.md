@@ -19,14 +19,14 @@ To run the program, use the command:
 
 ### The program has two commands: `new` and `list`.
 
-### The `new` command gets a random activity from the Bored API using the provided filters and saves it in the database. For example:
+#### The `new` command gets a random activity from the Bored API using the provided filters and saves it in the database. For example:
 
     ```bash
     python src/main.py new --type education --participants 1 --price_min 0.1 --price_max 30 --accessibility_min 0.1 --accessibility_max 0.5
     ```
 This command will run the program and get a new random activity with type education, 1 participant, price 0.1, and accessibility 0.1, then save it in the database.
 
-### The `list` command lists the latest activities saved in the database. For example:
+#### The `list` command lists the latest activities saved in the database. For example:
 
     ```bash
     python src/main.py list
